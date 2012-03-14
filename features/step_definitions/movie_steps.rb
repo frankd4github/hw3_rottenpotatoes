@@ -9,6 +9,14 @@ Given /the following movies exist/ do |movies_table|
   #assert false, "Unimplmemented"
 end
 
+Given /^(?:|I )check only the following ratings: (.+)$/ do |ratings|
+  step %Q{I check the following ratings: '#{ratings}'}
+  checked_ratings = ratings.split(/\s*,\s*/)
+  unchecked_ratings = (['G','PG','PG-13','NC-17','R'].to_set - checked_ratings.to_set).to_a
+  step %Q{I uncheck the following ratings: '#{unchecked_ratings.join("','")}'}
+end
+
+
 # Make sure that one string (regexp) occurs before or after another one
 #   on the same page
 
