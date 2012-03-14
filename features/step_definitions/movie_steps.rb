@@ -4,12 +4,6 @@ Given /the following movies exist/ do |movies_table|
   movies_table.hashes.each do |movie|
     # each returned element will be a hash whose key is the table header.
     # you should arrange to add that movie to the database here.
-<<<<<<< HEAD
-    debugger
-    Movie.create(movie)
-  end
-  #assert false, "Unimplmemented"
-=======
     Movie.create(movie)
   end
   #assert false, "Unimplmemented"
@@ -20,7 +14,6 @@ Given /^(?:|I )check only the following ratings: (.+)$/ do |ratings|
   checked_ratings = ratings.split(/\s*,\s*/)
   unchecked_ratings = (['G','PG','PG-13','NC-17','R'].to_set - checked_ratings.to_set).to_a
   step %Q{I uncheck the following ratings: '#{unchecked_ratings.join("','")}'} unless (unchecked_ratings.size == 0)
->>>>>>> 804cbde3bdd8e7254946a32e919d4181db4a3358
 end
 
 
@@ -50,5 +43,12 @@ end
 
 Then /I should see all of the movies/ do
   # pending
-  debugger
+  assert false, "Unimplmemented"
 end
+
+Then /I should fail/ do
+  #pending # express the regexp above with the code you wish you had
+  assert false, "Unimplmemented"
+end
+
+

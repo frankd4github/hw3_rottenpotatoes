@@ -23,7 +23,11 @@ Background: movies have been added to database
 
 Scenario: sort movies alphabetically
   # your steps here
+  Then I should fail
+
+
 
 Scenario: sort movies in increasing order of release date
   # your steps here
+  Then I should fail
 
