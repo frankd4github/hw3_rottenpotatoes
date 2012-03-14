@@ -4,11 +4,25 @@ Given /the following movies exist/ do |movies_table|
   movies_table.hashes.each do |movie|
     # each returned element will be a hash whose key is the table header.
     # you should arrange to add that movie to the database here.
+<<<<<<< HEAD
     debugger
     Movie.create(movie)
   end
   #assert false, "Unimplmemented"
+=======
+    Movie.create(movie)
+  end
+  #assert false, "Unimplmemented"
 end
+
+Given /^(?:|I )check only the following ratings: (.+)$/ do |ratings|
+  step %Q{I check the following ratings: '#{ratings}'} unless (ratings == '')
+  checked_ratings = ratings.split(/\s*,\s*/)
+  unchecked_ratings = (['G','PG','PG-13','NC-17','R'].to_set - checked_ratings.to_set).to_a
+  step %Q{I uncheck the following ratings: '#{unchecked_ratings.join("','")}'} unless (unchecked_ratings.size == 0)
+>>>>>>> 804cbde3bdd8e7254946a32e919d4181db4a3358
+end
+
 
 # Make sure that one string (regexp) occurs before or after another one
 #   on the same page
@@ -27,4 +41,14 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   # HINT: use String#split to split up the rating_list, then
   #   iterate over the ratings and reuse the "When I check..." or
   #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
+  rating_list.split(/,\s*/).each do |rating|
+    rating_not_quoted = rating.gsub(/'/,'')
+    #puts "Called with #{uncheck}checked #{rating_not_quoted}"
+    step "I #{uncheck}check \"ratings_#{rating_not_quoted}\""
+  end
+end
+
+Then /I should see all of the movies/ do
+  # pending
+  debugger
 end
