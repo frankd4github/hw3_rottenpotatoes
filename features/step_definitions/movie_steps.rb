@@ -10,10 +10,10 @@ Given /the following movies exist/ do |movies_table|
 end
 
 Given /^(?:|I )check only the following ratings: (.+)$/ do |ratings|
-  step %Q{I check the following ratings: '#{ratings}'}
+  step %Q{I check the following ratings: '#{ratings}'} unless (ratings == '')
   checked_ratings = ratings.split(/\s*,\s*/)
   unchecked_ratings = (['G','PG','PG-13','NC-17','R'].to_set - checked_ratings.to_set).to_a
-  step %Q{I uncheck the following ratings: '#{unchecked_ratings.join("','")}'}
+  step %Q{I uncheck the following ratings: '#{unchecked_ratings.join("','")}'} unless (unchecked_ratings.size == 0)
 end
 
 
@@ -39,4 +39,9 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
     #puts "Called with #{uncheck}checked #{rating_not_quoted}"
     step "I #{uncheck}check \"ratings_#{rating_not_quoted}\""
   end
+end
+
+Then /I should see all of the movies/ do
+  # pending
+  debugger
 end
